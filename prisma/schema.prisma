@@ -27,8 +27,8 @@ model User {
 
 model CheckIn {
   id          String    @id @default(uuid())
-  userId      String
-  location    String
+  latitude    Decimal?
+  longitude   Decimal?
   validatedAt DateTime? @map("validated_at")
   user_id     String    @map("user_id")
   gym_id      String    @map("gym_id")

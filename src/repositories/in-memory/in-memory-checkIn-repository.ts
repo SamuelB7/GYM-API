@@ -1,0 +1,48 @@
+import { CheckIn, Prisma } from "@prisma/client";
+import { randomUUID } from "crypto";
+import { CheckInRepository } from "../check-ins-repository";
+
+export class InMemoryCheckInRepository implements CheckInRepository {
+    public checkIns: CheckIn[] = []
+
+    async create(data: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
+        const checkIn: CheckIn = {
+            id: randomUUID(),
+            user_id: data.user_id,
+            gym_id: data.gym_id,
+            latitude: null,
+            longitude: null,
+            validatedAt: data.validatedAt ? new Date(data.validatedAt) : null,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+
+        this.checkIns.push(checkIn)
+
+        return checkIn
+    }
+
+    async findAll(): Promise<CheckIn[]> {
+        return this.checkIns
+    }
+
+    async findById(id: string): Promise<CheckIn | null> {
+        return this.checkIns.find(checkIn => checkIn.id === id) || null
+    }
+
+    async update(id: string, data: Prisma.CheckInUpdateInput): Promise<CheckIn> {
+        let checkIn = this.checkIns.find(checkIn => checkIn.id === id)
+        checkIn = data as CheckIn
+        const index = this.checkIns.findIndex(checkIn => checkIn.id === id)
+        this.checkIns[index] = checkIn
+        return checkIn
+    }
+
+    async delete(id: string): Promise<CheckIn | null> {
+        const checkIn = this.checkIns.find(checkIn => checkIn.id === id) || null
+        const index = this.checkIns.findIndex(checkIn => checkIn.id === id)
+        this.checkIns.splice(index, 1)
+        return checkIn
+    }
+
+}

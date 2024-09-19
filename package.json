@@ -9,7 +9,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev --name",
+    "prisma:seed": "npx prisma db seed",
+    "prisma:reset": "npx prisma migrate reset"
   },
   "keywords": [],
   "author": "",
