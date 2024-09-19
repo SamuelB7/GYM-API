@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { CheckIn, Prisma } from "@prisma/client";
 import { CheckInRepository } from "../check-ins-repository";
 
 export class PrismaCheckInRepository implements CheckInRepository {
@@ -37,5 +37,14 @@ export class PrismaCheckInRepository implements CheckInRepository {
                 id
             }
         });
+    }
+
+    findByUserIdOnDate(userId: string, date: Date): Promise<CheckIn | null> {
+        return prisma.checkIn.findFirst({
+            where: {
+                user_id: userId,
+                createdAt: date
+            }
+        })
     }
 }
