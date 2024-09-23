@@ -58,4 +58,8 @@ export class PrismaGymRepository implements GymsRepository {
             take: 20
         })
     }
+
+    async findNearbyGyms(userLatitude: number, userLongitude: number): Promise<Gym[]> {
+        throw new Error("Method not implemented.");
+    }
 }

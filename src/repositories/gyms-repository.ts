@@ -8,4 +8,5 @@ export interface GymsRepository {
     findByName(name: string, page: number): Promise<Gym[] | null>;
     update(id: string, data: Prisma.GymUpdateInput): Promise<Gym>;
     delete(id: string): Promise<Gym | null>;
+    findNearbyGyms(userLatitude: number, userLongitude: number): Promise<Gym[]>;
 }
