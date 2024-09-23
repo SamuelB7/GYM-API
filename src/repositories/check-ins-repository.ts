@@ -6,6 +6,7 @@ export interface CheckInRepository {
     findById(id: string): Promise<CheckIn | null>;
     findByUserId(userId: string, page: number): Promise<CheckIn[]>;
     findByUserIdOnDate(userId: string, date: Date): Promise<CheckIn | null>;
+    countByUserId(userId: string): Promise<number>;
     update(id: string, data: Prisma.CheckInUpdateInput): Promise<CheckIn>;
     delete(id: string): Promise<CheckIn | null>;
 }
