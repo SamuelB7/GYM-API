@@ -49,4 +49,7 @@ export class InMemoryGymRepository implements GymsRepository {
         return gym
     }
 
+    async findByName(name: string, page: number): Promise<Gym[] | null> {
+        return this.gyms.filter(gym => gym.name.includes(name)).slice((page - 1) * 20, page * 20)
+    }
 }

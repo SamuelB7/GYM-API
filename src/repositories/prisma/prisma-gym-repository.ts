@@ -3,7 +3,6 @@ import { Gym, Prisma } from "@prisma/client";
 import { GymsRepository } from "../gyms-repository";
 
 export class PrismaGymRepository implements GymsRepository {
-
     async create(data: Prisma.GymCreateInput): Promise<Gym> {
         return await prisma.gym.create({
             data
@@ -48,4 +47,15 @@ export class PrismaGymRepository implements GymsRepository {
         })
     }
 
+    async findByName(name: string, page: number): Promise<Gym[] | null> {
+        return prisma.gym.findMany({
+            where: {
+                name: {
+                    contains: name
+                }
+            },
+            skip: page * 20,
+            take: 20
+        })
+    }
 }
