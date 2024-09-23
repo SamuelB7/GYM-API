@@ -39,12 +39,22 @@ export class PrismaCheckInRepository implements CheckInRepository {
         });
     }
 
-    findByUserIdOnDate(userId: string, date: Date): Promise<CheckIn | null> {
+    async findByUserIdOnDate(userId: string, date: Date): Promise<CheckIn | null> {
         return prisma.checkIn.findFirst({
             where: {
                 user_id: userId,
                 createdAt: date
             }
+        })
+    }
+
+    async findByUserId(userId: string, page: number): Promise<CheckIn[]> {
+        return prisma.checkIn.findMany({
+            where: {
+                user_id: userId
+            },
+            skip: page * 20,
+            take: 20
         })
     }
 }
