@@ -9,8 +9,8 @@ export class InMemoryGymRepository implements GymsRepository {
         const gym: Gym = {
             id: randomUUID(),
             name: data.name,
-            description: null,
-            phone: null,
+            description: data.description ?? null,
+            phone: data.phone ?? null,
             latitude: new Prisma.Decimal(data.latitude as Prisma.Decimal.Value),
             longitude: new Prisma.Decimal(data.longitude as Prisma.Decimal.Value),
             createdAt: new Date(),
