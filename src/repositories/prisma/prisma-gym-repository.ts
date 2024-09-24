@@ -48,7 +48,7 @@ export class PrismaGymRepository implements GymsRepository {
     }
 
     async findByName(name: string, page: number): Promise<Gym[] | null> {
-        return prisma.gym.findMany({
+        return await prisma.gym.findMany({
             where: {
                 name: {
                     contains: name

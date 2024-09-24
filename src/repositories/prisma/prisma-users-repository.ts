@@ -5,17 +5,17 @@ import { UsersRepository } from "../users-repository";
 export class PrismaUsersRepository implements UsersRepository {
 
     async create(data: Prisma.UserCreateInput) {
-        return prisma.user.create({
+        return await prisma.user.create({
             data
         });
     }
 
     async findAll() {
-        return prisma.user.findMany();
+        return await prisma.user.findMany();
     }
 
     async findByEmail(email: string) {
-        return prisma.user.findUnique({
+        return await prisma.user.findUnique({
             where: {
                 email
             }
@@ -23,7 +23,7 @@ export class PrismaUsersRepository implements UsersRepository {
     }
 
     async findById(id: string) {
-        return prisma.user.findUnique({
+        return await prisma.user.findUnique({
             where: {
                 id
             }
@@ -31,7 +31,7 @@ export class PrismaUsersRepository implements UsersRepository {
     }
 
     async update(id: string, data: Prisma.UserUpdateInput) {
-        return prisma.user.update({
+        return await prisma.user.update({
             where: {
                 id
             },
@@ -40,7 +40,7 @@ export class PrismaUsersRepository implements UsersRepository {
     }
 
     async delete(id: string) {
-        return prisma.user.delete({
+        return await prisma.user.delete({
             where: {
                 id
             }
