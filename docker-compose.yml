@@ -33,7 +33,7 @@ services:
       - .:/app
     env_file: .env
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@gym-db:5432/${POSTGRES_DB}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@gym-db:5432/${POSTGRES_DB}?schema=public
 
 networks:
   base_network:
