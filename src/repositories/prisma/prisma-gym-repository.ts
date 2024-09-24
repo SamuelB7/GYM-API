@@ -54,12 +54,15 @@ export class PrismaGymRepository implements GymsRepository {
                     contains: name
                 }
             },
-            skip: page * 20,
+            skip: (page - 1) * 20,
             take: 20
         })
     }
 
     async findNearbyGyms(userLatitude: number, userLongitude: number): Promise<Gym[]> {
-        throw new Error("Method not implemented.");
+        return await prisma.$queryRaw<Gym[]>`
+            SELECT * from gyms
+            WHERE ( 6371 * acos( cos( radians(${userLatitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${userLongitude}) ) + sin( radians(${userLatitude}) ) * sin( radians( latitude ) ) ) ) <= 10
+        `
     }
 }
