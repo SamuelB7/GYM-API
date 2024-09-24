@@ -36,4 +36,19 @@ describe("Validate check in use case", () => {
             validateCheckInUseCase.execute({ checkInId: '1' })
         ).rejects.toThrowError(ResourceNotFoundError)
     })
+
+    it('should not be able to validate a checkIn after 20 minutes of its creation', async () => {
+        vi.setSystemTime(new Date(2023, 0, 1, 13, 40))
+
+        const checkIn = await checkInRepository.create({
+            gym_id: '1',
+            user_id: '1',
+        })
+
+        vi.advanceTimersByTime(21 * 60 * 1000)
+
+        await expect(() =>
+            validateCheckInUseCase.execute({ checkInId: checkIn.id })
+        ).rejects.toThrowError(Error)
+    });
 })

@@ -22,6 +22,14 @@ export class ValidateCheckInUseCase {
             throw new ResourceNotFoundError();
         }
 
+        const now = new Date();
+
+        const diff = now.getTime() - checkIn.createdAt.getTime();
+
+        if (diff > 20 * 60 * 1000) {
+            throw new Error('Check in is too old to be validated');
+        }
+
         checkIn.validatedAt = new Date();
 
         await this.checkInRepository.update(checkIn.id, checkIn);
