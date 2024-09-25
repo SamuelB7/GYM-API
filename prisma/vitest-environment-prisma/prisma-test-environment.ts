@@ -21,7 +21,6 @@ export default <Environment><unknown>{
     name: 'prisma',
     transformMode: 'ssr',
     async setup() {
-        console.log('Setting up Prisma environment')
         const schema = randomUUID()
         const databaseUrl = generateDatabaseURL(schema)
         process.env.DATABASE_URL = databaseUrl
@@ -30,7 +29,6 @@ export default <Environment><unknown>{
 
         return {
             async teardown() {
-                console.log('Tearing down Prisma environment')
                 await prisma.$executeRawUnsafe(`DROP SCHEMA IF EXISTS "${schema}" cascade`)
                 await prisma.$disconnect()
             },

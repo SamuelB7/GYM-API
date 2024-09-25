@@ -60,7 +60,7 @@ export class PrismaCheckInRepository implements CheckInRepository {
             where: {
                 user_id: userId
             },
-            skip: page * 20,
+            skip: (page - 1) * 20,
             take: 20
         })
     }

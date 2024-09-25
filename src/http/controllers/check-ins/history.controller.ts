@@ -6,12 +6,11 @@ export async function checkInHistoryController(request: FastifyRequest, reply: F
     const checkInHistoryBodySchema = z.object({
         page: z.coerce.number().min(1).default(1),
     })
-
-    const { page } = checkInHistoryBodySchema.parse(request.body)
+    const { page } = checkInHistoryBodySchema.parse(request.query)
 
     const checkInHistoryUseCase = makeGetUserCheckInsHistoryUseCase()
 
     const checkIns = await checkInHistoryUseCase.execute({ page, userId: request.user.sub })
 
-    return reply.status(201).send(checkIns)
+    return reply.status(200).send(checkIns)
 }
