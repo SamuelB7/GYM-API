@@ -14,5 +14,5 @@ export async function searchGymController(request: FastifyRequest, reply: Fastif
 
     const gym = await searchGymUseCase.execute({ name: query, page })
 
-    return reply.status(201).send(gym)
+    return reply.status(200).send(gym)
 }
