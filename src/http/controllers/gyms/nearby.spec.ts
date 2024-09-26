@@ -14,7 +14,7 @@ describe("Nearby gyms (e2e)", () => {
     })
 
     it("should search for a nearby gym", async () => {
-        const { token } = await createAndAuthenticateUser(app);
+        const { token } = await createAndAuthenticateUser(app, true);
 
         await request(app.server).post("/gyms").set('Authorization', `Bearer ${token}`).send({
             name: "Some Gym",

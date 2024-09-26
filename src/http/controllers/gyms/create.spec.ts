@@ -14,7 +14,7 @@ describe("Create gym (e2e)", () => {
     })
 
     it("should create a new gym", async () => {
-        const { token } = await createAndAuthenticateUser(app);
+        const { token } = await createAndAuthenticateUser(app, true);
 
         const response = await request(app.server).post("/gyms").set('Authorization', `Bearer ${token}`).send({
             name: "Some Gym",
