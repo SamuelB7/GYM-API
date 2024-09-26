@@ -6,6 +6,7 @@ API for a gym management system built with NodeJS.
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Documentation](#documentation)
 - [License](#license)
 - [Contact Information](#contact-information)
 
@@ -45,7 +46,11 @@ To start the server in development mode, run:
 ```sh
 npm run start:dev
 ```
-The server will be running at http://localhost:3000.
+The server will be running at http://localhost:3000
+
+## Documentation
+
+After starting the application, go to http://localhost:3000/documentation to check the documentation of the api endpoints
 
 ## License
 
