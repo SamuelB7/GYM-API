@@ -1,5 +1,7 @@
 import fastifyCookie from "@fastify/cookie";
 import fastifyJwt from "@fastify/jwt";
+import fastifySwagger from "@fastify/swagger";
+import fastifySwaggerUi from "@fastify/swagger-ui";
 import fastify from "fastify";
 import { ZodError } from "zod";
 import { env } from "./env";
@@ -20,6 +22,35 @@ app.register(fastifyJwt, {
     }
 })
 app.register(fastifyCookie)
+app.register(fastifySwagger, {
+    swagger: {
+        info: {
+            title: 'Gym API',
+            description: 'API documentation for the Gym management system',
+            version: '1.0.0'
+        },
+        host: 'localhost:3000',
+        schemes: ['http'],
+        consumes: ['application/json'],
+        produces: ['application/json']
+    }
+});
+
+app.register(fastifySwaggerUi, {
+    routePrefix: '/documentation',
+    uiConfig: {
+        docExpansion: 'list',
+        deepLinking: false
+    },
+    uiHooks: {
+        onRequest: function (request, reply, next) { next() },
+        preHandler: function (request, reply, next) { next() }
+    },
+    staticCSP: true,
+    transformStaticCSP: (header) => header,
+    transformSpecification: (swaggerObject, request, reply) => { return swaggerObject },
+    transformSpecificationClone: true
+});
 app.register(usersRoutes)
 app.register(gymsRoutes)
 app.register(checkInsRoutes)
