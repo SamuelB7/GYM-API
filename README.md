@@ -14,8 +14,8 @@ API for a gym management system built with NodeJS.
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/gym-api.git
-    cd gym-api
+    https://github.com/SamuelB7/GYM-API.git
+    cd GYM-API
     ```
 
 2. Copy the `.env.example` to `.env` and configure your environment variables:
@@ -42,7 +42,7 @@ API for a gym management system built with NodeJS.
 
 ## Usage
 
-To start the server in development mode, run:
+To start the server in development mode, without docker run:
 ```sh
 npm run start:dev
 ```
