@@ -14,7 +14,7 @@ API for a gym management system built with NodeJS.
 
 1. Clone the repository:
     ```sh
-    https://github.com/SamuelB7/GYM-API.git
+    git clone https://github.com/SamuelB7/GYM-API.git
     cd GYM-API
     ```
 
